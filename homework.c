@@ -61,13 +61,18 @@ void next_prime(){
 
 }
 
-
+/*Function is the interrupt handler. SIGHUP will restart the counter from 2 and increasing
+ * SIGUSR1 will skip the next prime number
+ * SIGUSR2 will reverse the direction of the incrementation.
+ * 
+ */
 void handler(int signum, siginfo_t *siginfo, void* context){
 	siginfo +=1;
 	if (context == NULL){}
 	switch (signum){
 		case SIGHUP:
 			number.next = 1;
+			number.increment = 2;
 			next_prime();
 			fflush(stdout);
 			break;
