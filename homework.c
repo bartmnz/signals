@@ -25,6 +25,19 @@ void handler(int signum, siginfo_t *siginfo, void* context){
 	siginfo +=1;
 	if (context == NULL){}
 	switch (signum){
+		case SIGHUP:
+			number.next = 1;
+			next_prime();
+			fflush(stdout);
+			break;
+		case SIGUSR1:
+			next_prime();
+			fflush(stdout);
+			break;
+		case SIGUSR2:
+			number.increment = number.increment * -1;
+			fflush(stdout);
+			break;
 	}
 }
 
