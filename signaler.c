@@ -73,7 +73,7 @@ void handler(int signum, siginfo_t *siginfo, void* context){
 		case SIGHUP:
 			number.next = 1;
 			number.increment = 2;
-			next_prime();
+			//next_prime();
 			fflush(stdout);
 			break;
 		case SIGUSR1:
