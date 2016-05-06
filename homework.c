@@ -15,6 +15,10 @@ struct prime{
 
 struct prime number;
 
+/*Function will generate the next prime number. Utilizes global struct
+ * prime to store the starting position, and the increment either positive or negative.
+ * 
+ */
 void next_prime(){
 	// should always be incrementing by 2 up or down
 	if (!(number.increment == 2) && !(number.increment == -2)){
@@ -78,6 +82,9 @@ void handler(int signum, siginfo_t *siginfo, void* context){
 	}
 }
 
+/*
+ * You know what mian does ... I hope 
+ */
 
 
 int main(int argc, char* argv[]){
@@ -87,6 +94,9 @@ int main(int argc, char* argv[]){
 	number.max = UINT_MAX;
 	int var = 0;
 	int opt, sflag, rflag, errflag;
+	/*
+	 * Checking optional arguments here.
+	 */
 	while ((opt = getopt(argc, argv, "s:e:r:")) != -1){
 		switch (opt){
 		case 's':
@@ -121,7 +131,9 @@ int main(int argc, char* argv[]){
 		fprintf(stdout, "ERROR: usage: -s and -r are mutually exclusive.");
 		exit(0);
 	}
-
+/*
+ * setting up signal handler here
+ */
 	struct sigaction psa;
 	memset (&psa, '\0', sizeof(psa));
 
@@ -139,6 +151,7 @@ int main(int argc, char* argv[]){
 		printf("bad places\n");
 	}
 
+	// forever loop program will continue running until CTRL-C / D etc or an out of bounds error
 	while(1){
 		next_prime();
 		fprintf(stdout, "next prime is %d\n", number.next);
