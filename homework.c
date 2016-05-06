@@ -16,7 +16,44 @@ struct prime{
 struct prime number;
 
 void next_prime(){
-	
+	// should always be incrementing by 2 up or down
+	if (!(number.increment == 2) && !(number.increment == -2)){
+		fprintf(stderr, "ERROR: invalid increment\n");
+		exit(0);
+	}
+	//TODO check to ensure increasing numbers
+	if (number.next < 2){
+		number.next = 2;
+		return;
+	}else if ( number.next == 2){
+		number.next = 3;
+		return;
+	}
+	unsigned int temp = number.next+=number.increment;
+
+	unsigned int check;
+
+	for(;temp < number.max && temp >= 2; temp+=number.increment){
+		// increment temp up or down depending on the setting in struct
+		check = (unsigned int)sqrt((double)temp); // can start checking at square root
+		if (! check & 1){
+			//printf("%d\n", check);
+			check +=1; // make sure check is odd
+		}
+		for(; check > 0; check--){ // even numbers are not prime
+			if( check == 1){ // temp is prime
+				number.next = temp;
+				return;
+			}
+			int prime = temp % check;
+			//printf("temp is %d, check is %d, prime is %d\n", temp, check, prime);
+			if ( ! prime ){ //temp is divisible by check -- not prime
+				break;
+			}
+		}
+	}
+	fprintf(stderr, "ERROR: next number is out of bounds \n");
+	exit(0);
 
 }
 
