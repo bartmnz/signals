@@ -2,7 +2,7 @@ CFLAGS+= -std=c11 -Wall -Werror -Wextra -pedantic -Wfloat-equal -Waggregate-retu
 CFLAGS+=-D _XOPEN_SOURCE=500
 CFLAGS+=-D _POSIX_C_SOURCE=200809L
 
-TARGET=sinaler
+TARGET=signaler
 OBJS=signaler.o
 .PHONY: clean debug profile
 
